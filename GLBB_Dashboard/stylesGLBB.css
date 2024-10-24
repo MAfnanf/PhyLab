@@ -1,0 +1,253 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Arial', sans-serif;
+}
+
+body {
+    background-color: #c9e8e6;
+    color: #333;
+    line-height: 1.6;
+}
+
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #6FE5A7;
+    padding: 1vh 2vw;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.navbar .logo {
+    display: flex;
+    align-items: center;
+}
+
+.navbar .logo img {
+    height: 70px;
+    margin-right: 10px;
+}
+
+.navbar .menu a {
+    margin-left: 30px;
+    text-decoration: none;
+    color: #000;
+    font-weight: bold;
+    transition: color 0.3s;
+}
+
+.navbar .menu a:hover {
+    color: #555;
+}
+
+/* Main Content */
+.main-content {
+    padding: 50px 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    position: relative;
+    overflow: hidden;
+}
+
+.main-content::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('../Resource/2-physics.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    opacity: 0.25;
+    z-index: -1;
+}
+
+.image {
+    display: block;
+    box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.1);
+    margin-left: auto;
+    margin-right: auto;
+}   
+
+.container {
+    display: flex;
+    justify-content: space-between;
+    max-width: 1200px;
+    margin: 0 auto;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+}
+
+/* Explanation Section */
+.explanation {
+    flex: 1;
+    padding: 2vw;
+}
+
+.text {
+    display: block;
+    text-align: center;
+}
+
+.explanation img {
+    display: block;
+    margin-bottom: 1vh;
+}
+
+.formula {
+    background-color: #e0f7fa;
+    padding: 15px;
+    border-radius: 5px;
+    margin-top: 20px;
+}
+
+.formula-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
+.formula-text {
+    flex: 1;
+}
+
+.image-formula {
+    display: block;
+    box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.1);
+    margin-left: 15px;
+}
+
+.formula-image {
+    text-align: center;
+    margin-top: 1vh;
+}
+
+/* Simulator Section */
+.simulator {
+    flex: 1;
+    padding: 2vw;
+    background-color: #f9f9f9;
+    border-left: 1px solid #eee;
+}
+
+.simulator h2 {
+    margin-bottom: 1vh;
+    text-align: center;
+}
+
+.canvas-container {
+    position: relative;
+    margin-bottom: 1vh; 
+}
+
+canvas {
+    border: 1px solid #ddd;
+    display: block;
+}
+
+.congrats-message {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+}
+
+.congrats-message svg {
+    margin-right: 10px;
+}
+
+.hidden {
+    display: none;
+}
+
+.controls {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1vh;
+    margin-bottom: 1vh;
+}
+
+.input-group {
+    display: flex;
+    flex-direction: column;
+}
+
+label {
+    margin-bottom: 0.5vw;
+    color: #555;
+}
+
+input {
+    padding: 0.5vw;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+.buttons {
+    display: flex;
+    justify-content: center;
+    gap: 1vh;
+    margin-bottom: 1vh;
+}
+
+button {
+    padding: 0.5rem 1vh;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 2vh;
+    transition: background-color 0.3s;
+}
+
+#fireButton {
+    background-color: #4CAF50;
+    color: white;
+}
+
+#fireButton:hover {
+    background-color: #45a049;
+}
+
+#resetButton {
+    background-color: #f44336;
+    color: white;
+}
+
+#resetButton:hover {
+    background-color: #da190b;
+}
+
+.stats {
+    background-color: #f0f0f0;
+    padding: 1vh;
+    border-radius: 4px;
+}
+
+.stats p {
+    margin: 0.5rem 0;
+}
+
+.video{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.text-video {
+    margin-top: 1vw;
+    text-align: center;
+}
