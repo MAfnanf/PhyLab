@@ -29,3 +29,4 @@ function highlightSelectedCard(cardId) {
   document.querySelectorAll('.card').forEach(card => card.style.backgroundColor = 'white');
   document.getElementById(cardId).style.backgroundColor = '#6FE5A7';
 }
+//tes
