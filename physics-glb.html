@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PhyLab - GLB Dashboard</title>
+    <link rel="stylesheet" href="GLB_Dashboard/stylesGLB.css">
+</head>
+<body>
+    <!-- Navbar -->
+    <header class="navbar">
+        <div class="logo">
+            <img src="Resource/1-logo.png" alt="Phylab Logo">
+            <h2>"Make Physics More Fun"</h2>
+        </div>
+        <nav class="menu">
+            <a href="index.html">Beranda</a>
+            <a href="physics-login.html">Login</a>
+        </nav>
+    </header>
+
+    <!-- Main Section -->
+    <section class="main-content">
+        <div class="container">
+            <!-- Explanation Section -->
+            <div class="explanation">
+                <h3 class="text">GERAK LURUS BERATURAN (GLB)</h3>
+                <hr><br>
+                <img class="image" src="Resource/5-GLBgambar.png" alt="GLB Illustration" width="300" height="300">
+                <br>
+                <p>Gerak lurus beraturan (GLB) adalah gerak sepanjang lintasan lurus dengan kecepatan tetap, di mana kecepatan benda tidak berubah baik dalam besar maupun arah. Karena kecepatannya konstan, percepatan benda bernilai nol.</p>
+                <div class="formula">
+                    <div class="formula-content">
+                        <div class="formula-text">
+                            <p>Rumus:</p>
+                            <p>v = kecepatan (m/s)<br>s = jarak/tempuh (m)<br>t = waktu (s)</p>
+                        </div>
+                        <img class="image-formula" src="Resource/6-rumusGLB.png" alt="Rumus GLB" width="150" height="125">
+                    </div>
+                </div>
+            </div>
+
+            <!-- GLB Simulation Game -->
+            <div class="glb-simulation">
+                <h2>Simulasi GLB</h2>
+                <canvas id="glbCanvas"></canvas>
+                <div class="controls">
+                    <div>
+                        <label for="startPosition">Posisi Awal:</label>
+                        <span id="startPositionValue">0</span> m
+                    </div>
+                    <div>
+                        <label for="velocity">Kecepatan (m/s):</label>
+                        <input type="number" id="velocity" min="0" step="0.1" value="0" required>
+                    </div>
+                </div>
+                <div class="buttons">
+                    <button id="startButton">Mulai</button>
+                    <button id="resetButton">Reset</button>
+                </div>
+                <div class="results">
+                    <p>Waktu: <span id="time">0.00</span> detik</p>
+                    <p id="averageVelocity" style="display: none;">Kecepatan Rata-rata: <span id="avgVelocityValue"></span> m/s</p>
+                </div>
+                <div class="video-container">
+                    <h3 class="text-video">Mau lebih ngerti? Coba tonton video ini yuk!</h3> 
+                    <iframe class="video" width="400" height="250" src="https://www.youtube.com/embed/3YCRAse9irs?si=_JSBfMwLOuN2KuHI" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script src="GLB_Dashboard/script-glb.js"></script>
+</body>
+</html>

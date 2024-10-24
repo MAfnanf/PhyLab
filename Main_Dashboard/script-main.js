@@ -17,9 +17,9 @@ document.getElementById('glbb-card').addEventListener('click', () => {
 
 document.querySelector('.cta-button').addEventListener('click', () => {
   if (selectedOption === "GLB") {
-    window.location.href = "../GLB_Dashboard/physics-glb.html";
+    window.location.href = "../physics-glb.html";
   } else if (selectedOption === "GLBB") {
-    window.location.href = "../GLBB_Dashboard/physics-glbb.html";
+    window.location.href = "../physics-glbb.html";
   } else {
     alert("Pilih salah satu sebelum melanjuti pembelajaran!");
   }
