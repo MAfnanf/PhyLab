@@ -99,16 +99,14 @@ body {
     align-items: center;
     min-height: 100vh;
     position: relative;
-    background-image: url('../Resource/2-physics.jpg');
     background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-attachment: fixed;
 }
 
 .main-content::before {
+    opacity: 0.25;
     content: "";
     position: absolute;
+    background-image: url('../Resource/2-physics.jpg');
     top: 0;
     left: 0;
     width: 100%;
