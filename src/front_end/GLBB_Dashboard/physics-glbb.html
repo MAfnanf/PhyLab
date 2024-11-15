@@ -4,18 +4,18 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>PhyLab - GLBB Dashboard</title>
-    <link rel="stylesheet" href="GLBB_Dashboard/stylesGLBB.css">
+    <link rel="stylesheet" href="stylesGLBB.css">
 </head>
 <body>
     <!-- Navbar -->
     <header class="navbar">
         <div class="logo">
-            <img src="Resource/1-logo.png" alt="Phylab Logo">
+            <img src="../Resource/1-logo.png" alt="Phylab Logo">
             <h2>"Make Physics More Fun"</h2>
         </div>
         <nav class="menu">
-            <a href="index.html">Beranda</a>
-            <a href="physics-login.html">Login</a>
+            <a href="../../../index.html">Beranda</a>
+            <a href="../Login_Dashboard/physics-login.html">Login</a>
         </nav>
     </header>
 
@@ -26,8 +26,8 @@
             <div class="explanation">
                 <h3 class="text">GERAK LURUS BERUBAH BERATURAN (GLBB)</h3>
                 <hr><br>
-                <img class="image" src="Resource/7-GLBBgambar.png" alt="GLB Illustration" width="450" height="250">
-                <p>Gerak lurus beraturan (GLB) adalah gerak sepanjang lintasan lurus dengan kecepatan tetap, di mana kecepatan benda tidak berubah baik dalam besar maupun arah. Karena kecepatannya konstan, percepatan benda bernilai nol.</p>
+                <img class="image" src="../Resource/7-GLBBgambar.png" alt="GLBB Illustration" width="450" height="250">
+                <p>Gerak lurus berubah beraturan (GLBB) adalah gerak benda dalam lintasan garis lurus dengan percepatan tetap. Dalam hal ini, kecepatan benda berubah secara beraturan seiring berjalannya waktu.</p>
                 <br>
                 <div>
                     <p>Berdasarkan jenis percepatannya, GLBB dibagi menjadi dua, yaitu GLBB dipercepat dan diperlambat.
@@ -40,13 +40,14 @@
                     <div class="formula-content">
                         <div class="formula-text">
                             <p>Rumus:</p>
-                            <p>v = kecepatan (m/s)<br>s = jarak/tempuh (m)<br>t = waktu (s)</p>
+                            <p>v = v₀ + at<br>s = v₀t + ½at²<br>v² = v₀² + 2as</p>
                         </div>
                         <div class="formula-image">
-                            <img class="image-formula" src="Resource/8-rumusGLBB.png" alt="Rumus GLB" width="240" height="125">
+                            <img class="image-formula" src="../Resource/8-rumusGLBB.png" alt="Rumus GLBB" width="240" height="125">
                         </div>
                     </div>
                 </div>
+                <button id="showExamButton" class="latihan-btn">Ayo Latihan</button>
             </div>
             
             <!-- Simulator Section -->
@@ -68,6 +69,10 @@
                         <label for="angle">Sudut (derajat)</label>
                         <input type="number" id="angle" value="45">
                     </div>
+                    <div class="input-group">
+                        <label for="acceleration">Percepatan (m/s²)</label>
+                        <input type="number" id="acceleration" value="0">
+                    </div>
                 </div>
                 <div class="buttons">
                     <button id="fireButton">Tembak</button>
@@ -75,6 +80,7 @@
                 </div>
                 <div class="stats">
                     <p>Waktu: <span id="time">0.00</span> s</p>
+                    <p>Kecepatan: <span id="velocity">0.00</span> m/s</p>
                 </div>
                 <div class="video-container">
                     <h3 class="text-video">Mau lebih ngerti? Coba tonton video ini yuk!</h3> 
@@ -84,6 +90,6 @@
         </div>
     </section>
 
-    <script src="GLBB_Dashboard/script-glbb.js"></script>
+    <script src="script-glbb.js"></script>
 </body>
 </html>

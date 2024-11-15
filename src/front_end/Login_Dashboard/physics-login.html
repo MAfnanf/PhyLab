@@ -4,18 +4,18 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>PhyLab Dashboard</title>
-  <link rel="stylesheet" href="Login_Dashboard/stylesLogin.css">
+  <link rel="stylesheet" href="stylesLogin.css">
 </head>
 <body>
   <!-- Navbar -->
   <header class="navbar">
     <div class="logo">
-      <img src="Resource/1-logo.png" alt="Phylab Logo">
+      <img src="../Resource/1-logo.png" alt="Phylab Logo">
       <h2>"Make Physics More Fun"</h2>
     </div>
     <nav class="menu">
-      <a href="index.html">Beranda</a>
-      <a href="#">Register</a>
+      <a href="../../../index.html">Beranda</a>
+      <a href="../Register_Dashboard/register.html">Register</a>
     </nav>
   </header>
 
@@ -23,20 +23,18 @@
   <section class="hero">
     <div class="login-container">
       <h2>Login</h2>
-      <form class="login-form">
-        <label for="username">Username</label>
-        <input type="text" id="username" placeholder="Type your username">
+      <form class="login-form" id="loginForm">
+        <label for="username">Email</label>
+        <input type="email" id="email" placeholder="Type your email">
         
         <label for="password">Password</label>
         <input type="password" id="password" placeholder="Type your password">
-        
-        <a href="#" class="forgot-password">Forgot Password?</a>
 
         <button type="submit" class="login-button">LOGIN</button>
       </form>
     </div>
   </section>
 
-  <script src="Login_Dashboard/script-login.js"></script>
+  <script type="module" src="script-login.js"></script>
 </body>
 </html>

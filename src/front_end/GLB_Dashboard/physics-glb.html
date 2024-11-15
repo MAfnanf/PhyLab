@@ -4,18 +4,18 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>PhyLab - GLB Dashboard</title>
-    <link rel="stylesheet" href="GLB_Dashboard/stylesGLB.css">
+    <link rel="stylesheet" href="stylesGLB.css">
 </head>
 <body>
     <!-- Navbar -->
     <header class="navbar">
         <div class="logo">
-            <img src="Resource/1-logo.png" alt="Phylab Logo">
+            <img src="../Resource/1-logo.png" alt="Phylab Logo">
             <h2>"Make Physics More Fun"</h2>
         </div>
         <nav class="menu">
-            <a href="index.html">Beranda</a>
-            <a href="physics-login.html">Login</a>
+            <a href="../../../index.html">Beranda</a>
+            <a href="../Login_Dashboard/physics-login.html">Login</a>
         </nav>
     </header>
 
@@ -26,7 +26,7 @@
             <div class="explanation">
                 <h3 class="text">GERAK LURUS BERATURAN (GLB)</h3>
                 <hr><br>
-                <img class="image" src="Resource/5-GLBgambar.png" alt="GLB Illustration" width="300" height="300">
+                <img class="image" src="../Resource/5-GLBgambar.png" alt="GLB Illustration" width="300" height="300">
                 <br>
                 <p>Gerak lurus beraturan (GLB) adalah gerak sepanjang lintasan lurus dengan kecepatan tetap, di mana kecepatan benda tidak berubah baik dalam besar maupun arah. Karena kecepatannya konstan, percepatan benda bernilai nol.</p>
                 <div class="formula">
@@ -35,9 +35,10 @@
                             <p>Rumus:</p>
                             <p>v = kecepatan (m/s)<br>s = jarak/tempuh (m)<br>t = waktu (s)</p>
                         </div>
-                        <img class="image-formula" src="Resource/6-rumusGLB.png" alt="Rumus GLB" width="150" height="125">
+                        <img class="image-formula" src="../Resource/6-rumusGLB.png" alt="Rumus GLB" width="150" height="125">
                     </div>
                 </div>
+                <button id="showExamButton" class="latihan-btn">Ayo Latihan</button>
             </div>
 
             <!-- GLB Simulation Game -->
@@ -70,6 +71,6 @@
         </div>
     </section>
 
-    <script src="GLB_Dashboard/script-glb.js"></script>
+    <script src="script-glb.js"></script>
 </body>
 </html>

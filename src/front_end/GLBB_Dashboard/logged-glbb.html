@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PhyLab - GLBB Dashboard</title>
+    <link rel="stylesheet" href="styles-LoggedGLBB.css">
+</head>
+<body>
+    <!-- Navbar -->
+    <header class="navbar">
+        <div class="logo">
+            <img src="../Resource/1-logo.png" alt="Phylab Logo">
+            <h2>"Make Physics More Fun"</h2>
+        </div>
+        <nav class="menu">
+            <a href="../Main_Dashboard/logged.html">Beranda</a>
+        </nav>
+        <nav class="user">
+            <div class="user-profile">
+                <img src="../Resource/9-user.png" alt="avatar" id="user-avatar">
+                <span class="username">Username</span>
+                <div class="dropdown">
+                  <button class="logout-btn">Logout</button>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Main Section -->
+    <section class="main-content">
+        <div class="container">
+            <!-- Explanation Section -->
+            <div class="explanation">
+                <h3 class="text">GERAK LURUS BERUBAH BERATURAN (GLBB)</h3>
+                <hr><br>
+                <img class="image" src="../Resource/7-GLBBgambar.png" alt="GLBB Illustration" width="450" height="250">
+                <p>Gerak lurus berubah beraturan (GLBB) adalah gerak benda dalam lintasan garis lurus dengan percepatan tetap. Dalam hal ini, kecepatan benda berubah secara beraturan seiring berjalannya waktu.</p>
+                <br>
+                <div>
+                    <p>Berdasarkan jenis percepatannya, GLBB dibagi menjadi dua, yaitu GLBB dipercepat dan diperlambat.
+                    <ul>
+                        <li><strong>GLBB dipercepat </strong>adalah gerak yang kecepatan bendanya selalu bertambah setiap detiknya, sehingga geraknya semakin cepat. Pada GLBB jenis ini, percepatan bendanya bernilai positif. Ingat, percepatan termasuk besaran vektor, sehingga kamu harus memperhatikan perjanjian tandanya. </li>
+                        <li><strong>GLBB diperlambat </strong>gerak yang kecepatan benda selalu berkurang setiap detiknya, hingga benda tersebut berhenti. Pada GLBB jenis ini, percepatan bendanya bernilai negatif. </p></li>
+                    </ul>
+                </div>
+                <div class="formula">
+                    <div class="formula-content">
+                        <div class="formula-text">
+                            <p>Rumus:</p>
+                            <p>v = v₀ + at<br>s = v₀t + ½at²<br>v² = v₀² + 2as</p>
+                        </div>
+                        <div class="formula-image">
+                            <img class="image-formula" src="../Resource/8-rumusGLBB.png" alt="Rumus GLBB" width="240" height="125">
+                        </div>
+                    </div>
+                </div>
+                <!-- "Ayo Latihan" Button -->
+                <div class="latihan-button-container">
+                    <button id="showExamButton" class="latihan-btn">Ayo Latihan</button>
+                    <div id="scoreDisplay" class="score-badge">Score: {0/3}</div>
+                    <p id="congratsMessage" class="congrats-message"></p>
+                </div>
+            </div>
+            
+            <!-- Simulator Section -->
+            <div class="simulator">
+                <h2>Simulator GLBB</h2>
+                <p>(Anda bisa menggerakkan bulatan dengan mouse)</p>
+                <div class="canvas-container">
+                    <canvas id="simulationCanvas" width="600" height="400"></canvas>
+                    <div id="congratsMessage" class="congrats-message hidden">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="alert-circle"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></svg>
+                        Selamat! Anda mengenai target!
+                    </div>
+                </div>
+                <div class="controls">
+                    <div class="input-group">
+                        <label for="initialVelocity">Kecepatan Awal (m/s)</label>
+                        <input type="number" id="initialVelocity" value="20">
+                    </div>
+                    <div class="input-group">
+                        <label for="angle">Sudut (derajat)</label>
+                        <input type="number" id="angle" value="45">
+                    </div>
+                    <div class="input-group">
+                        <label for="acceleration">Percepatan (m/s²)</label>
+                        <input type="number" id="acceleration" value="0">
+                    </div>
+                </div>
+                <div class="buttons">
+                    <button id="fireButton">Tembak</button>
+                    <button id="resetButton">Reset</button>
+                </div>
+                <div class="stats">
+                    <p>Waktu: <span id="time">0.00</span> s</p>
+                    <p>Kecepatan: <span id="velocity">0.00</span> m/s</p>
+                </div>
+                <div class="video-container">
+                    <h3 class="text-video">Mau lebih ngerti? Coba tonton video ini yuk!</h3> 
+                    <iframe width="560" height="315" src="https://www.youtube.com/embed/3YCRAse9irs?si=tKQE5oL2k432GVQu&amp;start=246" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                </div>
+            </div>
+        </div>
+
+        <!-- Exam Section (Initially Hidden) -->
+        <section class="exam-section" id="examSection" style="display: none;">
+            <h2 class="exam-title">Latihan Soal GLBB</h2>
+            <div class="exam-container">
+                <div class="question-card">
+                    <h3>Soal 1</h3>
+                    <p>Sebuah mobil bergerak dengan kecepatan awal 10 m/s dan mengalami percepatan 2 m/s². Berapa kecepatan mobil setelah 5 detik?</p>
+                    <div class="options">
+                        <label class="option">
+                            <input type="radio" name="q4" value="20"> 
+                            <span>20m/s</span>
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="q4" value="25">
+                            <span>25m/x</span>
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="q4" value="30">
+                            <span>30m/s</span>
+                        </label>
+                    </div>
+                    <button class="submit-btn" data-question="q4">Submit</button>
+                </div>
+    
+                <div class="question-card">
+                    <h3>Soal 2</h3>
+                    <p>Bola dilempar vertikal ke atas dengan kecepatan awal 20 m/s. Berapa ketinggian maksimum yang dicapai bola? (g = 10 m/s²)</p>
+                    <div class="options">
+                        <label class="option">
+                            <input type="radio" name="q5" value="10">
+                            <span>10 m</span>
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="q5" value="20"> 
+                            <span>20 m</span>
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="q5" value="30">
+                            <span>30 m</span>
+                        </label>
+                    </div>
+                    <button class="submit-btn" data-question="q5">Submit</button>
+                </div>
+    
+                <div class="question-card">
+                    <h3>Soal 3</h3>
+                    <p>Sebuah benda jatuh bebas dari ketinggian 80 m. Berapa waktu yang dibutuhkan untuk mencapai tanah? (g = 10 m/s²)</p>
+                    <div class="options">
+                        <label class="option">
+                            <input type="radio" name="q6" value="2">
+                            <span>2 s</span>
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="q6" value="4"> 
+                            <span>4 s</span>
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="q6" value="6">
+                            <span>6 s</span>
+                        </label>
+                    </div>
+                    <button class="submit-btn" data-question="q6">Submit</button>
+                </div>
+                <div id="congratsPopup" class="popup">
+                    <h2>Kerja Bagus!</h2>
+                    <h3>Selamat telah menyelesaikan semua soal</h3>
+                </div>
+            </div>
+        </section>
+    </section>
+    
+    <script type = "module" src = "script-LoggedGLBB.js"></script>
+</body>
+</html>

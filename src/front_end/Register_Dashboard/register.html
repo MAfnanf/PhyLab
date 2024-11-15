@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PhyLab Registration</title>
+  <link rel="stylesheet" href="stylesRegister.css">
+</head>
+<body>
+  <!-- Navbar -->
+  <header class="navbar">
+    <div class="logo">
+      <img src="../Resource/1-logo.png" alt="Phylab Logo">
+      <h2>"Make Physics More Fun"</h2>
+    </div>
+    <nav class="menu">
+      <a href="../../../index.html">Beranda</a>
+      <a href="../Login_Dashboard/physics-login.html">Login</a>
+    </nav>
+  </header>
+
+  <!-- Hero Section (Registration Form) -->
+  <section class="hero">
+    <div class="register-container">
+      <h2>Register</h2>
+      <form class="register-form" id="registerForm">
+        <label for="fullname">Full Name</label>
+        <input type="text" id="fullname" placeholder="Enter your full name">
+        
+        <label for="email">Email</label>
+        <input type="email" id="email" placeholder="Enter your email">
+        
+        <label for="username">Username</label>
+        <input type="text" id="username" placeholder="Choose a username">
+        
+        <label for="password">Password</label>
+        <input type="password" id="password" placeholder="Create a password">
+        
+        <label for="confirm-password">Confirm Password</label>
+        <input type="password" id="confirm-password" placeholder="Confirm your password">
+
+        <button type="submit" class="register-button">REGISTER</button>
+        
+        <p class="login-link">Already have an account? <a href="../Login_Dashboard/physics-login.html">Login here</a></p>
+      </form>
+    </div>
+  </section>
+  <script type="module" src="script-register.js"></script>
+</body>
+</html>

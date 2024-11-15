@@ -1,0 +1,417 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Arial', sans-serif;
+}
+
+body {
+    background-color: #c9e8e6;
+    color: #333;
+    line-height: 1.6;
+}
+
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #6FE5A7;
+    padding: 1rem 2rem;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.navbar .logo {
+    display: flex;
+    align-items: center;
+}
+
+.navbar .logo img {
+    height: 70px;
+    margin-right: 10px;
+}
+
+.user-profile {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    position: relative;
+    margin-right: 2vw;
+}
+
+.user-profile img {
+    margin-right: 0.5vw;
+    width: 2vw;
+}
+
+
+.username {
+    color: #000;
+    font-weight: bold;
+    transition: color 0.3s;
+}
+
+.username:hover {
+    color: #555;
+}
+
+.dropdown {
+    margin-top: 1vh;
+    display: none;
+    position: absolute;
+    top: 100%;
+    right: 0;
+    background-color: white;
+    border-radius: 4px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+}
+
+.logout-btn {
+    display: block;
+    width: 100%;
+    padding: 10px 20px;
+    border: none;
+    background: none;
+    text-align: left;
+    cursor: pointer;
+}
+
+.logout-btn:hover {
+    background-color: #f0f0f0;
+}
+
+.navbar .menu a {
+    margin-left: 50vw;
+    text-decoration: none;
+    color: #000;
+    font-weight: bold;
+    transition: color 0.3s;
+}
+
+.navbar .menu a:hover {
+    color: #555;
+}
+
+.main-content {
+    padding: 50px 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh;
+    position: relative;
+    background-image: url('../Resource/2-physics.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+}
+
+.main-content::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(255, 255, 255, 0.75);
+    z-index: 1;
+}
+
+.container {
+    display: flex;
+    background-color: #fff;
+    border-radius: 10px;
+    z-index: 2;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding: 2vh 5vw;
+    gap: 3vw;
+    max-width: 1200px;
+    width: 100%;
+    position: relative;
+}
+
+.container h3 {
+    text-align: center;
+}
+
+/* Explanation Section */
+.explanation {
+    max-width: 400px;
+    text-align: left;
+}
+
+.image {
+    display: block;
+    box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.1);
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.formula {
+    background-color: #e0f7fa;
+    padding: 15px;
+    border-radius: 5px;
+    margin-top: 20px;
+}
+
+.formula-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
+.formula-text {
+    flex: 1;
+}
+
+.image-formula {
+    display: block;
+    box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.1);
+    margin-left: 15px;
+}
+
+.glb-simulation {
+    flex: 1;
+    padding: 2vw;
+    background-color: #f9f9f9;
+    border-left: 1px solid #eee;
+}
+
+.glb-simulation h2 {
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+#glbCanvas {
+    width: 100%;
+    height: 150px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    touch-action: none;
+    cursor: grab;
+}
+
+#glbCanvas:active {
+    cursor: grabbing;
+}
+
+.controls {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    margin: 20px 0;
+}
+
+.buttons {
+    display: flex;
+    justify-content: center;
+    gap: 1vh;
+    margin-bottom: 1vh;
+}
+
+button {
+    display: flex;
+    padding: 10px 20px;
+    font-size: 16px;
+    background-color: #6FE5A7;
+    color: #000;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+button:hover {
+    background-color: #5ac88d;
+}
+
+button:disabled {
+    background-color: #cccccc;
+    cursor: not-allowed;
+}
+
+.results {
+    text-align: center;
+    font-size: 18px;
+    margin-bottom: 20px;
+    background-color: #e0f7fa;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+input[type="number"] {
+    width: 100%;
+    padding: 5px;
+    border: 1px solid #ddd;
+    border-radius: 3px;
+}
+
+.video {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* Exam Section Styles */
+.exam-section {
+    margin-top: 40px;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    max-width: 900px;
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    position: relative;
+    z-index: 2;
+}
+
+.exam-title {
+    text-align: center;
+    color: #333;
+    margin-bottom: 20px;
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.exam-container {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.question-card {
+    background-color: #e0f7fa;
+    padding: 20px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+}
+
+.question-card h3 {
+    color: #333;
+    margin-bottom: 10px;
+}
+
+.options {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 15px;
+}
+
+.option {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    background-color: #fff;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.option:hover {
+    background-color: #f0f0f0;
+}
+
+.option input[type="radio"] {
+    margin-right: 10px;
+}
+
+.submit-btn {
+    display: block;
+    width: 200px;
+    margin: 20px auto 0;
+    padding: 12px 24px;
+    background-color: #6FE5A7;
+    color: #000;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.submit-btn:hover {
+    background-color: #5ac88d;
+}
+
+.latihan-button-container {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background-color: #fff;
+    border-radius: 5px;
+    padding: 2vw;  /* Reduced from 5vw to be more compact */
+    text-align: center;
+    position: relative;
+    z-index: 2;
+}
+
+.latihan-btn {
+    margin-left: 2vw;
+    display: inline-flex;  /* Changed from inline-block */
+    align-items: center;
+    justify-content: center;
+    padding: 12px 24px;
+    font-size: 16px;  /* Reduced from 18px to match GLBB */
+    background-color: #6FE5A7;
+    color: #000;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    white-space: nowrap;  /* Prevent text wrapping */
+    height: 40px;  /* Fixed height to ensure consistency */
+}
+
+.latihan-btn:hover {
+    background-color: #5ac88d;
+}
+
+.correct {
+    color: #4CAF50;
+    font-weight: bold;
+}
+
+.incorrect {
+    color: #f44336;
+    font-weight: bold;
+}
+
+.score-badge {
+    font-size: 16px;  /* Matched with button font size */
+    font-weight: bold;
+    color: #fff;
+    background-color: #4CAF50;
+    padding: 8px 16px;
+    border-radius: 8px;
+    display: inline-flex;  /* Changed from inline-block */
+    align-items: center;
+    margin: 0;  /* Remove margin to rely on container gap */
+    height: 40px;  /* Match button height */
+}
+
+.congrats-message {
+    font-size: 16px;
+    font-weight: bold;
+    color: #4CAF50;
+    display: none; /* Hidden until the user scores 3/3 */
+}
+
+/* Pop-up style */
+.popup {
+    display: none; /* Initially hidden */
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: white;
+    border: 2px solid #333;
+    padding: 20px;
+    text-align: center;
+    border-radius: 8px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+    z-index: 1000;
+}

@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PhyLab - GLB Dashboard</title>
+    <link rel="stylesheet" href="stylesGLB-Logged.css">
+</head>
+<body>
+    <!-- Navbar -->
+    <header class="navbar">
+        <div class="logo">
+            <img src="../Resource/1-logo.png" alt="Phylab Logo">
+            <h2>"Make Physics More Fun"</h2>
+        </div>
+        <nav class="menu">
+            <a href="../Main_Dashboard/logged.html">Beranda</a>
+        </nav>
+        <nav class="user">
+            <div class="user-profile">
+                <img src="../Resource/9-user.png" alt="avatar" id="user-avatar">
+                <span class="username">Username</span>
+                <div class="dropdown">
+                  <button class="logout-btn">Logout</button>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Main Section -->
+    <section class="main-content">
+        <div class="container">
+            <!-- Explanation Section -->
+            <div class="explanation">
+                <h3 class="text">GERAK LURUS BERATURAN (GLB)</h3>
+                <hr><br>
+                <img class="image" src="../Resource/5-GLBgambar.png" alt="GLB Illustration" width="300" height="300">
+                <br>
+                <p>Gerak lurus beraturan (GLB) adalah gerak sepanjang lintasan lurus dengan kecepatan tetap, di mana kecepatan benda tidak berubah baik dalam besar maupun arah. Karena kecepatannya konstan, percepatan benda bernilai nol.</p>
+                <div class="formula">
+                    <div class="formula-content">
+                        <div class="formula-text">
+                            <p>Rumus:</p>
+                            <p>v = kecepatan (m/s)<br>s = jarak/tempuh (m)<br>t = waktu (s)</p>
+                        </div>
+                        <img class="image-formula" src="../Resource/6-rumusGLB.png" alt="Rumus GLB" width="150" height="125">
+                    </div>
+                </div>
+                <!-- "Ayo Latihan" Button -->
+                <div class="latihan-button-container">
+                    <button id="showExamButton" class="latihan-btn">Ayo Latihan</button>
+                    <div id="scoreDisplay" class="score-badge">Score: {0/3}</div>
+                    <p id="congratsMessage" class="congrats-message"></p>
+                </div>
+            </div>
+
+            <!-- GLB Simulation Game -->
+            <div class="glb-simulation">
+                <h2>Simulasi GLB</h2>
+                <canvas id="glbCanvas"></canvas>
+                <div class="controls">
+                    <div>
+                        <label for="startPosition">Posisi Awal:</label>
+                        <span id="startPositionValue">0</span> m
+                    </div>
+                    <div>
+                        <label for="velocity">Kecepatan (m/s):</label>
+                        <input type="number" id="velocity" min="0" step="0.1" value="0" required>
+                    </div>
+                </div>
+                <div class="buttons">
+                    <button id="startButton">Mulai</button>
+                    <button id="resetButton">Reset</button>
+                </div>
+                <div class="results">
+                    <p>Waktu: <span id="time">0.00</span> detik</p>
+                    <p id="averageVelocity" style="display: none;">Kecepatan Rata-rata: <span id="avgVelocityValue"></span> m/s</p>
+                </div>
+                <div class="video-container">
+                    <h3 class="text-video">Mau lebih ngerti? Coba tonton video ini yuk!</h3> 
+                    <iframe class="video" width="400" height="250" src="https://www.youtube.com/embed/3YCRAse9irs?si=_JSBfMwLOuN2KuHI" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                </div>
+            </div>
+        </div>
+
+        <!-- Exam Section (Initially Hidden) -->
+        <section class="exam-section" id="examSection" style="display: none;">
+            <h2 class="exam-title">Latihan Soal GLB</h2>
+            <div class="exam-container">
+                <div class="question-card">
+                    <h3>Soal 1</h3>
+                    <p>Bila Andi memiliki kecepatan sebesar 20m/s, kira-kira berapa lama waktu yang harus ditempuh oleh Andi untuk mencapai jarak 80m?</p>
+                    <div class="options">
+                        <label class="option">
+                            <input type="radio" name="q1" value="20">
+                            <span>20s</span>
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="q1" value="5">
+                            <span>5s</span>
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="q1" value="4">
+                            <span>4s</span>
+                        </label>
+                    </div>
+                    <button class="submit-btn" data-question="q1">Submit</button>
+                </div>
+        
+                <div class="question-card">
+                    <h3>Soal 2</h3>
+                    <p>Sebuah mobil bergerak dengan kecepatan tetap 72 km/jam. Jarak yang ditempuh mobil setelah bergerak selama 15 menit adalah...</p>
+                    <div class="options">
+                        <label class="option">
+                            <input type="radio" name="q2" value="18">
+                            <span>18 km</span>
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="q2" value="15">
+                            <span>15 km</span>
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="q2" value="12">
+                            <span>12 km</span>
+                        </label>
+                    </div>
+                    <button class="submit-btn" data-question="q2">Submit</button>
+                </div>
+        
+                <div class="question-card">
+                    <h3>Soal 3</h3>
+                    <p>Jika sebuah benda bergerak dengan kecepatan konstan 5 m/s selama 10 detik, berapakah jarak yang ditempuh?</p>
+                    <div class="options">
+                        <label class="option">
+                            <input type="radio" name="q3" value="40">
+                            <span>40 m</span>
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="q3" value="50">
+                            <span>50 m</span>
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="q3" value="60">
+                            <span>60 m</span>
+                        </label>
+                    </div>
+                    <button class="submit-btn" data-question="q3">Submit</button>
+                </div>
+            </div>
+            <div id="congratsPopup" class="popup">
+                <h2>Kerja Bagus!</h2>
+                <h3>Selamat telah menyelesaikan semua soal</h3>
+            </div>
+        </section>
+    </section>
+    
+    <script type="module" src="script-GLBLogged.js"></script>
+</body>
+</html>

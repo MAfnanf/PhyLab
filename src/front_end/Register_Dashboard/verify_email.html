@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Verify Your Email - PhyLab</title>
+  <link rel="stylesheet" href="stylesVerify.css">
+</head>
+<body>
+  <div class="verify-container">
+    <h1>Verify Your Email</h1>
+    <p>We've sent a verification email to your address. Please check your inbox and click the verification link to complete your registration.</p>
+    <p>If you don't see the email, please check your spam folder.</p>
+    <button id="goToLogin" class="verify-button">Go to Login</button>
+  </div>
+
+  <script>
+    document.getElementById('goToLogin').addEventListener('click', function() {
+      window.location.href = "login.html";
+    });
+  </script>
+</body>
+</html>
