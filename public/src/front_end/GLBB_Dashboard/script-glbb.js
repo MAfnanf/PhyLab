@@ -24,40 +24,30 @@ document.addEventListener('DOMContentLoaded', () => {
     function resizeCanvas() {
         canvas.width = canvas.clientWidth;
         canvas.height = canvas.clientHeight;
-    
-        // Sesuaikan ulang targetPosition agar tetap proporsional
-        targetPosition.x = canvas.width - 100; // Contoh posisi target dinamis
+        targetPosition.x = canvas.width - 100; 
         targetPosition.y = canvas.height - 50;
     
-        draw(); // Pastikan semua elemen digambar ulang setelah resize
+        draw(); 
     }
     
-    // Panggil resizeCanvas setiap kali ukuran layar berubah
     window.addEventListener('resize', resizeCanvas);
     resizeCanvas();
 
     function draw() {
-        const PADDING = 10; // Jarak aman dari tepi
+        const PADDING = 10; 
         ctx.clearRect(0, 0, canvas.width, canvas.height);
-        
-        // Teks di kanan atas
         ctx.fillStyle = 'black';
         ctx.font = '12px Arial';
         ctx.textAlign = 'right';
         ctx.fillText(`X Distance: ${((targetPosition.x / SCALE)+2).toFixed(1)}m`, canvas.width - PADDING, PADDING + 10);
         ctx.fillText(`Y Height: ${(((canvas.height - targetPosition.y) / SCALE)+2).toFixed(1)}m`, canvas.width - PADDING, PADDING + 30);
-
-        // Lantai (ground)
         ctx.fillStyle = 'green';
         ctx.fillRect(0, canvas.height - 5, canvas.width, 5);
-
-        // Target di canvas
         ctx.strokeStyle = 'blue';
         ctx.lineWidth = 2;
         ctx.beginPath();
         ctx.arc(targetPosition.x, targetPosition.y, 10, 0, 2 * Math.PI);
         ctx.stroke();
-
         ctx.save();
         ctx.translate(10, CANVAS_HEIGHT - 10);
         ctx.rotate(-angle * Math.PI / 180);
@@ -72,9 +62,6 @@ document.addEventListener('DOMContentLoaded', () => {
             ctx.fill();
         }
 
-        
-
-        // Lintasan (garis bantuan)
         drawRulers();
     }
 
@@ -160,7 +147,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function simulate() {
         if (isSimulating) {
-            time += 0.016; // 60 FPS
+            time += 0.016; 
             const radianAngle = angle * Math.PI / 180;
 
             position.x = initialVelocity * Math.cos(radianAngle) * time + 0.5 * acceleration * Math.cos(radianAngle) * time * time;
@@ -254,7 +241,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     document.getElementById('fireButton').addEventListener('click', handleFire);
     document.getElementById('resetButton').addEventListener('click', handleReset);
-
     document.getElementById('initialVelocity').addEventListener('input', (e) => {
         initialVelocity = Number(e.target.value);
     });
@@ -273,5 +259,3 @@ document.addEventListener('DOMContentLoaded', () => {
         alert("Login Terlebih Dahulu");
     });
 });
-
-console.log("GLBB Simulation code updated. This should work on both desktop and mobile devices, including Pixel phones.");

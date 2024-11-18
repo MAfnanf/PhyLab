@@ -92,7 +92,6 @@ body {
     color: #555;
 }
 
-/* Main Content */
 .main-content {
     padding: 50px 20px;
     display: flex;
@@ -129,8 +128,6 @@ body {
     z-index: 2;
 }
 
-
-/* Explanation Section */
 .explanation {
     flex: 1;
     padding: 2vw;
@@ -174,7 +171,6 @@ body {
     margin-top: 1vh;
 }
 
-/* Simulator Section */
 .simulator {
     flex: 1;
     padding: 2vw;
@@ -300,7 +296,6 @@ button {
     text-align: center;
 }
 
-/* Exam Section Styles */
 .exam-section {
     margin-top: 40px;
     padding: 20px;
@@ -389,7 +384,7 @@ button {
     gap: 10px;
     background-color: #fff;
     border-radius: 5px;
-    padding: 2vw;  /* Reduced from 5vw to be more compact */
+    padding: 2vw;  
     text-align: center;
     position: relative;
     z-index: 2;
@@ -398,18 +393,18 @@ button {
 .latihan-btn {
     margin-top: 8vh;
     margin-left: 4.5vw;
-    display: inline-flex;  /* Changed from inline-block */
+    display: inline-flex;  
     align-items: center;
     justify-content: center;
     padding: 12px 24px;
-    font-size: 16px;  /* Reduced from 18px to match GLBB */
+    font-size: 16px;  
     background-color: #6FE5A7;
     color: #000;
     border: none;
     border-radius: 5px;
     cursor: pointer;
     transition: background-color 0.3s;
-    white-space: nowrap;  /* Prevent text wrapping */
+    white-space: nowrap;  
     height: 40px;  
 }
 
@@ -429,15 +424,15 @@ button {
 
 .score-badge {
     margin-top: 8vh;
-    font-size: 16px;  /* Matched with button font size */
+    font-size: 16px;  
     font-weight: bold;
     color: #fff;
     background-color: #4CAF50;
     padding: 8px 16px;
     border-radius: 8px;
-    display: inline-flex;  /* Changed from inline-block */
+    display: inline-flex;  
     align-items: center;
-    height: 40px;  /* Match button height */
+    height: 40px;  
 }
 
 .congrats-message-hidden {
@@ -573,11 +568,10 @@ button {
 
 @media screen and (max-width: 480px) {
     canvas {
-        width: 100%; /* Gunakan seluruh lebar layar */
+        width: 100%; 
         height: auto;
     }
 
-    /* Kurangi ukuran teks */
     canvas::after {
         font-size: 10px;
     }

@@ -21,7 +21,6 @@ document.addEventListener('DOMContentLoaded', async () => {
     const logoutBtn = document.querySelector('.logout-btn');
     const usernameElement = document.querySelector('.username');
     const userData = JSON.parse(localStorage.getItem('userData') || '{}');
-    const examType = 'GLBB'
 
     let initialVelocity = 20;
     let angle = 45;
@@ -35,21 +34,17 @@ document.addEventListener('DOMContentLoaded', async () => {
     let showCongrats = false;
     let lastX, lastY;
 
-    // Set user information
     usernameElement.textContent = userData.username || 'User';
 
-    // Toggle dropdown
     userProfile.addEventListener('click', function(e) {
         e.stopPropagation();
         dropdown.style.display = dropdown.style.display === 'block' ? 'none' : 'block';
     });
 
-    // Close dropdown when clicking outside
     document.addEventListener('click', function() {
         dropdown.style.display = 'none';
     });
 
-    // Logout functionality
     logoutBtn.addEventListener('click', function() {
         localStorage.removeItem('isLoggedIn');
         localStorage.removeItem('userData');
@@ -72,41 +67,30 @@ document.addEventListener('DOMContentLoaded', async () => {
     function resizeCanvas() {
         canvas.width = canvas.clientWidth;
         canvas.height = canvas.clientHeight;
-    
-        // Sesuaikan ulang targetPosition agar tetap proporsional
-        targetPosition.x = canvas.width - 100; // Contoh posisi target dinamis
+        targetPosition.x = canvas.width - 100;
         targetPosition.y = canvas.height - 50;
     
-        draw(); // Pastikan semua elemen digambar ulang setelah resize
+        draw();
     }
 
     window.addEventListener('resize', resizeCanvas);
     resizeCanvas();
 
     function draw() {
-        const PADDING = 10; // Jarak aman dari tepi
+        const PADDING = 10;
         ctx.clearRect(0, 0, canvas.width, canvas.height);
-        
-        // Teks di kanan atas
         ctx.fillStyle = 'black';
         ctx.font = '12px Arial';
         ctx.textAlign = 'right';
         ctx.fillText(`X Distance: ${(targetPosition.x / SCALE).toFixed(1)}m`, canvas.width - PADDING, PADDING + 10);
         ctx.fillText(`Y Height: ${((canvas.height - targetPosition.y) / SCALE).toFixed(1)}m`, canvas.width - PADDING, PADDING + 30);
-
-        // Lantai (ground)
         ctx.fillStyle = 'green';
         ctx.fillRect(0, canvas.height - 5, canvas.width, 5);
-
-        // Target di canvas
         ctx.strokeStyle = 'blue';
         ctx.lineWidth = 2;
         ctx.beginPath();
         ctx.arc(targetPosition.x, targetPosition.y, 10, 0, 2 * Math.PI);
         ctx.stroke();
-
-        // Lintasan (garis bantuan)
-        
         ctx.save();
         ctx.translate(10, CANVAS_HEIGHT - 10);
         ctx.rotate(-angle * Math.PI / 180);
@@ -128,8 +112,6 @@ document.addEventListener('DOMContentLoaded', async () => {
         ctx.stroke();
 
         drawRulers();
-
-        // Lintasan (garis bantuan)
     }
 
     function drawRulers() {
@@ -212,10 +194,9 @@ document.addEventListener('DOMContentLoaded', async () => {
     canvas.addEventListener('touchmove', handleMove, { passive: false });
     canvas.addEventListener('touchend', handleEnd);
 
-
     function simulate() {
         if (isSimulating) {
-            time += 0.016; // 60 FPS
+            time += 0.016; 
             const radianAngle = angle * Math.PI / 180;
 
             position.x = initialVelocity * Math.cos(radianAngle) * time + 0.5 * acceleration * Math.cos(radianAngle) * time * time;
@@ -249,7 +230,6 @@ document.addEventListener('DOMContentLoaded', async () => {
         return false;
     }
     
-
     function updateStats() {
         document.getElementById('time').textContent = time.toFixed(2);
         document.getElementById('velocity').textContent = Math.sqrt(velocity.x * velocity.x + velocity.y * velocity.y).toFixed(2);
@@ -309,7 +289,6 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     document.getElementById('fireButton').addEventListener('click', handleFire);
     document.getElementById('resetButton').addEventListener('click', handleReset);
-
     document.getElementById('initialVelocity').addEventListener('input', (e) => {
         initialVelocity = Number(e.target.value);
     });
@@ -325,18 +304,16 @@ document.addEventListener('DOMContentLoaded', async () => {
     draw();
 
     function applyProgressToUI(progress) {
-        let hasProgress = false; // Flag untuk mengecek apakah progress yang sesuai ditemukan
+        let hasProgress = false;
         console.log(`MASOK SINI`);
         for (const questionId in progress) {
             const { answer, isCorrect } = progress[questionId];
             const radioInput = document.querySelector(`input[name="${questionId}"][value="${answer}"]`);
             console.log(`KESINI JUGA`);
             console.log(questionId);
-            // Cek jika questionId adalah q4, q5, atau q6
             if (questionId === "q4" || questionId === "q5" || questionId === "q6") {
-                hasProgress = true; // Set flag menjadi true jika salah satu sesuai
+                hasProgress = true; 
             }
-    
             if (radioInput) {
                 radioInput.checked = true;
     
@@ -344,11 +321,9 @@ document.addEventListener('DOMContentLoaded', async () => {
                 resultElement.classList.add('question-result');
                 resultElement.textContent = isCorrect ? 'Benar! ✓' : 'Salah ✗';
                 resultElement.classList.add(isCorrect ? 'correct' : 'incorrect');
-    
-                // Debugging output to verify element selection
                 console.log(`Processing ${questionId}: answer=${answer}, isCorrect=${isCorrect}`);
-    
                 const questionContainer = radioInput.closest('.question-card');
+
                 if (questionContainer) {
                     const existingResult = questionContainer.querySelector('.question-result');
                     if (existingResult) {
@@ -363,11 +338,10 @@ document.addEventListener('DOMContentLoaded', async () => {
                 }
             }
         }
-    
-        // Tampilkan atau sembunyikan bagian ujian berdasarkan progress
+
         if (hasProgress) {
-            showExamButton.style.display = 'none'; // Sembunyikan tombol "Ayo Latihan"
-            examSection.style.display = 'block';   // Tampilkan section ujian
+            showExamButton.style.display = 'none'; 
+            examSection.style.display = 'block';   
             console.log("Progress valid ditemukan. Menampilkan section ujian.");
         } else {
             showExamButton.addEventListener('click', () => {
@@ -399,13 +373,10 @@ document.addEventListener('DOMContentLoaded', async () => {
     function showCongratsPopup() {
         const popup = document.getElementById('congratsPopup');
         popup.style.display = 'block';
-        // Hide the pop-up after a few seconds
         setTimeout(() => {
             popup.style.display = 'none';
-        }, 1500); // Adjust time as needed
+        }, 1500); 
     }
-    
-    
 
     document.querySelectorAll('input[type="radio"]').forEach(radio => {
         radio.addEventListener('change', () => {
@@ -413,8 +384,6 @@ document.addEventListener('DOMContentLoaded', async () => {
             document.querySelectorAll('input[type="radio"]:checked').forEach(radio => {
                 progressData[radio.name] = radio.value;
             });
-            
-            // Save progress with the updated data
             saveUserProgress(progressData);
         });
     });
@@ -425,8 +394,6 @@ document.addEventListener('DOMContentLoaded', async () => {
             console.error("User is not authenticated");
             return;
         }
-
-        // Ambil pilihan yang dipilih user untuk setiap soal
         document.querySelectorAll('input[type="radio"]:checked').forEach(radio => {
             const questionId = radio.name
             progressData[radio.name] = radio.value;
@@ -435,7 +402,6 @@ document.addEventListener('DOMContentLoaded', async () => {
                 isCorrect: radio.value === correctAnswers[questionId] // Store correctness too
             };
         });
-
         try {
             const progressRef = doc(db, "userProgress", user.uid);
             await setDoc(progressRef, { progress: progressData }, { merge: true });
@@ -467,14 +433,12 @@ document.addEventListener('DOMContentLoaded', async () => {
             return null;
         }
     }
-    
     const correctAnswers = {
-        q4: "20",    // 80m ÷ 20m/s = 4s
-        q5: "20",   // 72 km/h × 0.25h = 18 km
-        q6: "4"    // 5 m/s × 10s = 50 m
+        q4: "20",  
+        q5: "20",
+        q6: "4"  
     };
 
-    // Handle individual question submission
     document.querySelectorAll('.submit-btn').forEach(button => {
         button.addEventListener('click', (e) => {
             const questionId = e.target.dataset.question;
@@ -495,15 +459,13 @@ document.addEventListener('DOMContentLoaded', async () => {
                 resultElement.classList.add('incorrect');
             }
     
-            // Remove any existing result
             const existingResult = e.target.parentNode.querySelector('.question-result');
             if (existingResult) {
                 existingResult.remove();
             }
     
-            // Add the new result and update score in real-time
             e.target.parentNode.appendChild(resultElement);
-            updateScore(); // <-- This line ensures the score updates immediately
+            updateScore(); 
         });
     });
 });

@@ -42,7 +42,6 @@ body {
     color: #555;
 }
 
-/* Main Content */
 .main-content {
     padding: 50px 20px;
     display: flex;
@@ -88,7 +87,6 @@ body {
     z-index: 2;
 }
 
-/* Explanation Section */
 .explanation {
     flex: 1;
     padding: 2vw;
@@ -132,7 +130,6 @@ body {
     margin-top: 1vh;
 }
 
-/* Simulator Section */
 .simulator {
     flex: 1;
     padding: 2vw;
@@ -404,11 +401,10 @@ button {
 
 @media screen and (max-width: 480px) {
     canvas {
-        width: 100%; /* Gunakan seluruh lebar layar */
+        width: 100%; 
         height: auto;
     }
-
-    /* Kurangi ukuran teks */
+    
     canvas::after {
         font-size: 10px;
     }
