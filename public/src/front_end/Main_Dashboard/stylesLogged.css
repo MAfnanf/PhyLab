@@ -20,6 +20,30 @@ body {
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
+.user-profile {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    position: relative;
+    margin-right: 2vw;
+}
+
+.user-profile img {
+    margin-right: 0.5vw;
+    width: 2vw;
+}
+
+
+.username {
+    color: #000;
+    font-weight: bold;
+    transition: color 0.3s;
+}
+
+.username:hover {
+    color: #555;
+}
+
 .navbar .logo {
     display: flex;
     align-items: center;
@@ -204,4 +228,61 @@ body {
 .navbar .menu {
     display: flex;
     align-items: center;
+}
+
+@media screen and (max-width: 768px) {
+    html {
+        font-size: 12px;
+    }
+
+    .card {
+        background-color: white;
+        border-radius: 10px;
+        overflow: hidden;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        width: 300px;
+        text-align: center;
+    }
+
+    .navbar {
+        padding: 5vw;
+    }
+
+    .navbar .logo img {
+        height: 40px;
+    }
+
+    .navbar .logo h2 {
+        font-size: 1rem;
+    }
+
+    .cards {
+        justify-content: center;
+        gap: 20px
+    }
+}
+
+/* Enable smooth zooming */
+@media screen and (max-width: 768px) {
+    body {
+        min-width: 320px;
+        -webkit-text-size-adjust: 100%;
+        touch-action: manipulation;
+    }
+
+    * {
+        -webkit-tap-highlight-color: transparent;
+    }
+
+    .cards {
+        justify-content: center;
+        gap: 20px
+    }
+}
+
+@media screen and (max-width: 400px) {
+    .cards {
+        justify-content: center;
+        gap: 20px
+    }
 }

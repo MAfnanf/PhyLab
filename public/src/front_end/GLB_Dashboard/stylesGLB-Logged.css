@@ -134,7 +134,6 @@ body {
     text-align: center;
 }
 
-/* Explanation Section */
 .explanation {
     max-width: 400px;
     text-align: left;
@@ -252,7 +251,6 @@ input[type="number"] {
     margin-right: auto;
 }
 
-/* Exam Section Styles */
 .exam-section {
     margin-top: 40px;
     padding: 20px;
@@ -341,7 +339,7 @@ input[type="number"] {
     gap: 10px;
     background-color: #fff;
     border-radius: 5px;
-    padding: 2vw;  /* Reduced from 5vw to be more compact */
+    padding: 2vw;  
     text-align: center;
     position: relative;
     z-index: 2;
@@ -349,19 +347,19 @@ input[type="number"] {
 
 .latihan-btn {
     margin-left: 2vw;
-    display: inline-flex;  /* Changed from inline-block */
+    display: inline-flex;
     align-items: center;
     justify-content: center;
     padding: 12px 24px;
-    font-size: 16px;  /* Reduced from 18px to match GLBB */
+    font-size: 16px;
     background-color: #6FE5A7;
     color: #000;
     border: none;
     border-radius: 5px;
     cursor: pointer;
     transition: background-color 0.3s;
-    white-space: nowrap;  /* Prevent text wrapping */
-    height: 40px;  /* Fixed height to ensure consistency */
+    white-space: nowrap; 
+    height: 40px;
 }
 
 .latihan-btn:hover {
@@ -379,28 +377,27 @@ input[type="number"] {
 }
 
 .score-badge {
-    font-size: 16px;  /* Matched with button font size */
+    font-size: 16px; 
     font-weight: bold;
     color: #fff;
     background-color: #4CAF50;
     padding: 8px 16px;
     border-radius: 8px;
-    display: inline-flex;  /* Changed from inline-block */
+    display: inline-flex; 
     align-items: center;
-    margin: 0;  /* Remove margin to rely on container gap */
-    height: 40px;  /* Match button height */
+    margin: 0; 
+    height: 40px;  
 }
 
 .congrats-message {
     font-size: 16px;
     font-weight: bold;
     color: #4CAF50;
-    display: none; /* Hidden until the user scores 3/3 */
+    display: none;
 }
 
-/* Pop-up style */
 .popup {
-    display: none; /* Initially hidden */
+    display: none; 
     position: fixed;
     top: 50%;
     left: 50%;
@@ -413,3 +410,113 @@ input[type="number"] {
     box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
     z-index: 1000;
 }
+
+@media screen and (max-width: 768px) {
+    .container {
+        flex-direction: column;
+        padding: 1rem;
+    }
+
+    .explanation, .simulator {
+        width: 100%;
+        padding: 1rem;
+    }
+
+    .image, .image-formula {
+        max-width: 100%;
+        height: auto;
+    }
+
+    .formula-content {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .controls {
+        grid-template-columns: 1fr;
+    }
+
+    .buttons {
+        flex-direction: column;
+    }
+
+    button {
+        width: 100%;
+        margin-bottom: 10px;
+    }
+
+    #showExamButton {
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .video-container {
+        position: relative;
+        padding-bottom: 56.25%;
+        height: 0;
+        overflow: hidden;
+    }
+
+    .video-container iframe {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+    }
+
+    .navbar {
+        flex-direction: column;
+        padding: 1rem;
+    }
+
+    .navbar .logo img {
+        height: 50px;
+    }
+
+    .navbar .menu {
+        margin-top: 1rem;
+    }
+
+    .navbar .menu a {
+        margin-left: 15px;
+        font-size: 14px;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .navbar .logo h2 {
+        font-size: 16px;
+    }
+
+    .navbar .menu a {
+        margin-left: 10px;
+        font-size: 12px;
+    }
+
+    .text {
+        font-size: 18px;
+    }
+
+    .formula-text, .formula-image {
+        font-size: 14px;
+    }
+
+    .simulator h2 {
+        font-size: 20px;
+    }
+
+    .congrats-message {
+        font-size: 12px;
+        padding: 8px 16px;
+    }
+
+    .buttons {
+        flex-direction: column;
+    }
+
+    button {
+        width: 100%;
+    }
+}
+

@@ -8,7 +8,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     loginForm.addEventListener('submit', async function (e) {
         e.preventDefault();
-        
+
         const email = document.getElementById('email').value.trim();
         const password = document.getElementById('password').value.trim();
 
@@ -16,11 +16,9 @@ document.addEventListener('DOMContentLoaded', function () {
             alert("Please enter both email and password.");
             return;
         }
-
         try {
             const userCredential = await signInWithEmailAndPassword(auth, email, password);
             const user = userCredential.user;
-
             const docRef = doc(db, "users", user.uid);
             const docSnap = await getDoc(docRef);          
 
@@ -43,9 +41,7 @@ document.addEventListener('DOMContentLoaded', function () {
             console.error('Login error:', error);
             alert(`Login failed: ${error.message}`);
         }
-
         const userData = { username: usernameInput };
         localStorage.setItem('userData', JSON.stringify(userData));
-
     });
 });

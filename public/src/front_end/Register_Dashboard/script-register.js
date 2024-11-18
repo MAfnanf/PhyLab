@@ -19,14 +19,10 @@ document.addEventListener('DOMContentLoaded', function () {
         const confirmPassword = document.getElementById('confirm-password').value.trim();
         const username = document.getElementById('username').value.trim();
         const fullname = document.getElementById('fullname').value.trim();
-
-
         console.log("Form submitted");
-
         console.log("Email:", email);
         console.log("Password:", password);
 
-        // Simple validation
         if (!email || !password || !confirmPassword) {
             alert("Please fill in all fields.");
             return;
@@ -43,7 +39,6 @@ document.addEventListener('DOMContentLoaded', function () {
         }
 
         try {
-            // Try creating the user with Firebase
             const userCredential = await createUserWithEmailAndPassword(auth, email, password);
             const user = userCredential.user;
 
@@ -56,13 +51,11 @@ document.addEventListener('DOMContentLoaded', function () {
 
             console.log("User data saved to Firestore.");
             console.log("User created:", user);
-
-            // Send email verification
             await sendEmailVerification(user);
             console.log("Verification email sent.");
-
             alert("Registration successful! Please verify your email.");
             window.location.href = "../Login_Dashboard/physics-login.html";
+
         } catch (error) {
             console.error('Registration error:', error);
             console.error('Error saving user data:', error);
@@ -78,8 +71,6 @@ document.addEventListener('DOMContentLoaded', function () {
             
         });
         const usernameInput = document.getElementById('username-input').value;
-
-        //   Save the username to localStorage
         if (usernameInput) { // assuming a username is provided
             const userData = { username: usernameInput };
             localStorage.setItem('userData', JSON.stringify(userData));

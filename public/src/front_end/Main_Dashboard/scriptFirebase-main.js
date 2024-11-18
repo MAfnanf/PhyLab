@@ -4,7 +4,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const userData = JSON.parse(localStorage.getItem('userData') || '{}');
 
     if (isLoggedIn && userData.username) {
-        window.location.href = "public/src/front_end/Main_Dashboard/logged.html";
+        window.location.href = "src/front_end/Main_Dashboard/logged.html";
         return;
     }
 
@@ -24,14 +24,14 @@ document.addEventListener('DOMContentLoaded', function() {
             highlightSelectedCard('glbb-card');
         });
     }
-
+    
     const ctaButton = document.querySelector('.cta-button');
     if (ctaButton) {
         ctaButton.addEventListener('click', () => {
             if (selectedOption === "GLB") {
-                window.location.href = "public/src/front_end/GLB_Dashboard/physics-glb.html";
+                window.location.href = "src/front_end/GLB_Dashboard/physics-glb.html";
             } else if (selectedOption === "GLBB") {
-                window.location.href = "public/src/front_end/GLBB_Dashboard/physics-glbb.html";
+                window.location.href = "src/front_end/GLBB_Dashboard/physics-glbb.html";
             } else {
                 alert("Pilih salah satu sebelum melanjuti pembelajaran!");
             }

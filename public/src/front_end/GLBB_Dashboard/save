@@ -402,6 +402,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         // Hide the pop-up after a few seconds
         setTimeout(() => {
             popup.style.display = 'none';
+            popup.querySelector('.confetti-container').innerHTML = ''; // Clear confetti
         }, 1500); // Adjust time as needed
     }
     

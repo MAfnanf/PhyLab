@@ -29,26 +29,32 @@ document.addEventListener('DOMContentLoaded', async () => {
     let isRunning = false;
     let isDragging = false;
 
-    // Set user information
     usernameElement.textContent = userData.username || 'User';
-
-    // Toggle dropdown
     userProfile.addEventListener('click', function(e) {
         e.stopPropagation();
         dropdown.style.display = dropdown.style.display === 'block' ? 'none' : 'block';
     });
-
-    // Close dropdown when clicking outside
     document.addEventListener('click', function() {
         dropdown.style.display = 'none';
     });
-
-    // Logout functionality
     logoutBtn.addEventListener('click', function() {
         localStorage.removeItem('isLoggedIn');
         localStorage.removeItem('userData');
         window.location.href = "../Login_Dashboard/physics-login.html";
     });
+
+    async function handleExamSection() {
+        onAuthStateChanged(auth, async (user) => {
+            if (user) {
+                console.log("User is authenticated");
+                const progress = await loadUserProgress();
+                applyProgressToUI(progress);
+            } else {
+                console.error("User is not authenticated");
+            }
+        });
+    }
+    handleExamSection();
 
     function resizeCanvas() {
         canvas.width = canvas.clientWidth;
@@ -58,24 +64,20 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     function drawTrack() {
         ctx.clearRect(0, 0, canvas.width, canvas.height);
-        
         ctx.fillStyle = '#f0f0f0';
         ctx.fillRect(0, 0, canvas.width, canvas.height);
-        
         ctx.fillStyle = 'green';
         ctx.fillRect(0, 0, 2, canvas.height);
         ctx.fillStyle = 'red';
         ctx.fillRect(canvas.width - 2, 0, 2, canvas.height);
-        
-        // Draw distance markers
         ctx.fillStyle = 'black';
         ctx.font = '10px Arial';
+        
         for (let i = 0; i <= 10; i++) {
             const x = (i / 10) * canvas.width;
             ctx.fillRect(x, canvas.height - 10, 1, 10);
             ctx.fillText(i * 10 + 'm', x - 10, canvas.height - 15);
         }
-        
         const manX = (currentPosition / trackLength) * canvas.width;
         ctx.beginPath();
         ctx.arc(manX, canvas.height / 2, 10, 0, Math.PI * 2);
@@ -96,20 +98,17 @@ document.addEventListener('DOMContentLoaded', async () => {
         startButton.disabled = true;
         velocityInput.disabled = true;
         averageVelocityDisplay.style.display = 'none';
-        
         startTime = performance.now();
         currentPosition = startPosition;
-        
         animationId = requestAnimationFrame(updateSimulation);
     }
 
     function updateSimulation(timestamp) {
-        const elapsedTime = (timestamp - startTime) / 1000; // Convert to seconds
+        const elapsedTime = (timestamp - startTime) / 1000;
         timeDisplay.textContent = elapsedTime.toFixed(2);
-        
         currentPosition = startPosition + velocity * elapsedTime;
         drawTrack();
-        
+    
         if (currentPosition >= trackLength) {
             finishSimulation(elapsedTime);
         } else {
@@ -121,7 +120,6 @@ document.addEventListener('DOMContentLoaded', async () => {
         isRunning = false;
         startButton.disabled = false;
         velocityInput.disabled = false;
-        
         const avgVelocity = (trackLength - startPosition) / totalTime;
         avgVelocityValue.textContent = avgVelocity.toFixed(2);
         averageVelocityDisplay.style.display = 'block';
@@ -134,7 +132,6 @@ document.addEventListener('DOMContentLoaded', async () => {
         isRunning = false;
         startButton.disabled = false;
         velocityInput.disabled = false;
-        
         startPosition = 0;
         currentPosition = 0;
         velocity = 0;
@@ -182,68 +179,26 @@ document.addEventListener('DOMContentLoaded', async () => {
     window.addEventListener('resize', resizeCanvas);
     resizeCanvas();
 
-    // function isLoggedIn() {
-    //     return true;
-    // }
-
-    onAuthStateChanged(auth, async (user) => {
-        if (user) {
-            console.log("User is authenticated");
-
-            // Load user progress once authentication is confirmed
-            const progress = await loadUserProgress();
-            if (progress) {
-                // Show exam section if progress is found
-                document.getElementById('examSection').style.display = 'block';
-                document.getElementById('showExamButton').style.display = 'none';
-                applyProgressToUI(progress);
-            } else {
-                // Show exam button if no progress
-                document.getElementById('showExamButton').addEventListener('click', () => {
-                    document.getElementById('examSection').style.display = 'block';
-                    document.getElementById('showExamButton').style.display = 'none';
-                });
-            }
-        } else {
-            console.error("User is not authenticated");
-            // Optionally, redirect to login or show a login prompt
-        }
-    });
-
-    const progress = await loadUserProgress();
-    if (progress) {
-        // Jika progress ditemukan, langsung tampilkan section ujian
-        examSection.style.display = 'block';
-        showExamButton.style.display = 'none';
-        console.log("Data user loaded");
-
-        // Muat progress sebelumnya ke dalam UI
-        applyProgressToUI(progress);
-    } else {
-        showExamButton.addEventListener('click', () => {
-            examSection.style.display = 'block';
-            showExamButton.style.display = 'none';
-        });
-        console.log("No data loaded");
-    }
-
     function applyProgressToUI(progress) {
+        let hasProgress = false;
+        console.log(`MASOK SINI`);
         for (const questionId in progress) {
             const { answer, isCorrect } = progress[questionId];
             const radioInput = document.querySelector(`input[name="${questionId}"][value="${answer}"]`);
-    
+            console.log(`KESINI JUGA`);
+            console.log(questionId);
+            if (questionId === "q1" || questionId === "q2" || questionId === "q3") {
+                hasProgress = true; 
+            }
             if (radioInput) {
                 radioInput.checked = true;
-    
                 const resultElement = document.createElement('p');
                 resultElement.classList.add('question-result');
                 resultElement.textContent = isCorrect ? 'Benar! ✓' : 'Salah ✗';
                 resultElement.classList.add(isCorrect ? 'correct' : 'incorrect');
-    
-                // Debugging output to verify element selection
                 console.log(`Processing ${questionId}: answer=${answer}, isCorrect=${isCorrect}`);
-                
                 const questionContainer = radioInput.closest('.question-card');
+
                 if (questionContainer) {
                     const existingResult = questionContainer.querySelector('.question-result');
                     if (existingResult) {
@@ -258,6 +213,17 @@ document.addEventListener('DOMContentLoaded', async () => {
                 }
             }
         }
+        if (hasProgress) {
+            showExamButton.style.display = 'none'; 
+            examSection.style.display = 'block';  
+            console.log("Progress valid ditemukan. Menampilkan section ujian.");
+        } else {
+            showExamButton.addEventListener('click', () => {
+                examSection.style.display = 'block';
+                showExamButton.style.display = 'none';
+            });
+            console.log("No valid progress found.");
+        }
         updateScore();
     }
 
@@ -270,7 +236,6 @@ document.addEventListener('DOMContentLoaded', async () => {
                 correctAnswersCount++;
             }
         });
-    
         document.getElementById('scoreDisplay').textContent = `Score: ${correctAnswersCount}/${totalQuestions}`;
         if (correctAnswersCount === totalQuestions) {
             showCongratsPopup();
@@ -280,13 +245,10 @@ document.addEventListener('DOMContentLoaded', async () => {
     function showCongratsPopup() {
         const popup = document.getElementById('congratsPopup');
         popup.style.display = 'block';
-        // Hide the pop-up after a few seconds
         setTimeout(() => {
             popup.style.display = 'none';
-            popup.querySelector('.confetti-container').innerHTML = ''; // Clear confetti
-        }, 1500); // Adjust time as needed
+        }, 1500);
     }
-    
 
     document.querySelectorAll('input[type="radio"]').forEach(radio => {
         radio.addEventListener('change', () => {
@@ -294,8 +256,6 @@ document.addEventListener('DOMContentLoaded', async () => {
             document.querySelectorAll('input[type="radio"]:checked').forEach(radio => {
                 progressData[radio.name] = radio.value;
             });
-            
-            // Save progress with the updated data
             saveUserProgress(progressData);
         });
     });
@@ -307,7 +267,6 @@ document.addEventListener('DOMContentLoaded', async () => {
             return;
         }
 
-        // Ambil pilihan yang dipilih user untuk setiap soal
         document.querySelectorAll('input[type="radio"]:checked').forEach(radio => {
             const questionId = radio.name
             progressData[radio.name] = radio.value;
@@ -332,7 +291,6 @@ document.addEventListener('DOMContentLoaded', async () => {
             console.error("User is not authenticated");
             return null;
         }
-    
         try {
             const progressRef = doc(db, "userProgress", user.uid);
             const progressSnap = await getDoc(progressRef);
@@ -350,12 +308,11 @@ document.addEventListener('DOMContentLoaded', async () => {
     }
     
     const correctAnswers = {
-        q1: "4",    // 80m ÷ 20m/s = 4s
-        q2: "18",   // 72 km/h × 0.25h = 18 km
-        q3: "50"    // 5 m/s × 10s = 50 m
+        q1: "4",    
+        q2: "18",   
+        q3: "50"    
     };
 
-    // Handle individual question submission
     document.querySelectorAll('.submit-btn').forEach(button => {
         button.addEventListener('click', (e) => {
             const questionId = e.target.dataset.question;
@@ -376,15 +333,13 @@ document.addEventListener('DOMContentLoaded', async () => {
                 resultElement.classList.add('incorrect');
             }
     
-            // Remove any existing result
             const existingResult = e.target.parentNode.querySelector('.question-result');
             if (existingResult) {
                 existingResult.remove();
             }
     
-            // Add the new result and update score in real-time
             e.target.parentNode.appendChild(resultElement);
-            updateScore(); // <-- This line ensures the score updates immediately
+            updateScore();
         });
     });
 });

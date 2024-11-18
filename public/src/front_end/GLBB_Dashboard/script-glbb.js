@@ -4,7 +4,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const CANVAS_WIDTH = 600;
     const CANVAS_HEIGHT = 400;
-    const SCALE = 10;
+    const SCALE = CANVAS_WIDTH / 60;
     const GRAVITY = 9.8;
 
     canvas.width = CANVAS_WIDTH;
@@ -17,22 +17,47 @@ document.addEventListener('DOMContentLoaded', () => {
     let time = 0;
     let position = { x: 0, y: 0 };
     let velocity = { x: 0, y: 0 };
-    let targetPosition = { x: 500, y: CANVAS_HEIGHT - 50 };
+    let targetPosition = { x: CANVAS_WIDTH, y: CANVAS_HEIGHT };
     let isDragging = false;
-    const showExamButton = document.getElementById('showExamButton');
+    let lastX, lastY;
+
+    function resizeCanvas() {
+        canvas.width = canvas.clientWidth;
+        canvas.height = canvas.clientHeight;
+    
+        // Sesuaikan ulang targetPosition agar tetap proporsional
+        targetPosition.x = canvas.width - 100; // Contoh posisi target dinamis
+        targetPosition.y = canvas.height - 50;
+    
+        draw(); // Pastikan semua elemen digambar ulang setelah resize
+    }
+    
+    // Panggil resizeCanvas setiap kali ukuran layar berubah
+    window.addEventListener('resize', resizeCanvas);
+    resizeCanvas();
 
     function draw() {
-        ctx.clearRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
+        const PADDING = 10; // Jarak aman dari tepi
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
         
+        // Teks di kanan atas
         ctx.fillStyle = 'black';
         ctx.font = '12px Arial';
         ctx.textAlign = 'right';
-        ctx.fillText(`X Distance: ${(targetPosition.x / SCALE).toFixed(1)}m`, CANVAS_WIDTH - 10, 20);
-        ctx.fillText(`Y Height: ${((CANVAS_HEIGHT - targetPosition.y) / SCALE).toFixed(1)}m`, CANVAS_WIDTH - 10, 40);
+        ctx.fillText(`X Distance: ${((targetPosition.x / SCALE)+2).toFixed(1)}m`, canvas.width - PADDING, PADDING + 10);
+        ctx.fillText(`Y Height: ${(((canvas.height - targetPosition.y) / SCALE)+2).toFixed(1)}m`, canvas.width - PADDING, PADDING + 30);
 
+        // Lantai (ground)
         ctx.fillStyle = 'green';
-        ctx.fillRect(0, CANVAS_HEIGHT - 5, CANVAS_WIDTH, 5);
-        
+        ctx.fillRect(0, canvas.height - 5, canvas.width, 5);
+
+        // Target di canvas
+        ctx.strokeStyle = 'blue';
+        ctx.lineWidth = 2;
+        ctx.beginPath();
+        ctx.arc(targetPosition.x, targetPosition.y, 10, 0, 2 * Math.PI);
+        ctx.stroke();
+
         ctx.save();
         ctx.translate(10, CANVAS_HEIGHT - 10);
         ctx.rotate(-angle * Math.PI / 180);
@@ -46,13 +71,10 @@ document.addEventListener('DOMContentLoaded', () => {
             ctx.arc(position.x * SCALE, CANVAS_HEIGHT - position.y * SCALE, 3, 0, 2 * Math.PI);
             ctx.fill();
         }
-        
-        ctx.strokeStyle = 'blue';
-        ctx.lineWidth = 2;
-        ctx.beginPath();
-        ctx.arc(targetPosition.x, targetPosition.y, 10, 0, 2 * Math.PI);
-        ctx.stroke();
 
+        
+
+        // Lintasan (garis bantuan)
         drawRulers();
     }
 
@@ -81,6 +103,61 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
+    function handleStart(e) {
+        e.preventDefault();
+        const rect = canvas.getBoundingClientRect();
+        const x = (e.clientX || (e.touches && e.touches[0].clientX)) - rect.left;
+        const y = (e.clientY || (e.touches && e.touches[0].clientY)) - rect.top;
+        const dx = x - targetPosition.x;
+        const dy = y - targetPosition.y;
+        if (dx * dx + dy * dy < 100) { 
+            isDragging = true;
+            lastX = x;
+            lastY = y;
+            canvas.style.cursor = 'grabbing';
+        }
+    }
+
+    function getTouchPosition(e) {
+        const rect = canvas.getBoundingClientRect();
+        const touch = e.touches[0];
+        return {
+            x: touch.clientX - rect.left,
+            y: touch.clientY - rect.top,
+        };
+    }
+    
+    function handleMove(e) {
+        e.preventDefault();
+        if (isDragging) {
+            const pos = getTouchPosition(e);
+            const dx = pos.x - lastX;
+            const dy = pos.y - lastY;
+            targetPosition.x = Math.max(20, Math.min(targetPosition.x + dx, canvas.width - 20));
+            targetPosition.y = Math.max(20, Math.min(targetPosition.y + dy, canvas.height - 20));
+            lastX = pos.x;
+            lastY = pos.y;
+            draw();
+        }
+    }
+    console.log(`Canvas width: ${canvas.width}, height: ${canvas.height}`);
+    console.log(`Target position: x=${targetPosition.x}, y=${targetPosition.y}`);
+
+    function handleEnd(e) {
+        e.preventDefault();
+        isDragging = false;
+        canvas.style.cursor = 'grab';
+    }
+
+    canvas.addEventListener('mousedown', handleStart);
+    canvas.addEventListener('mousemove', handleMove);
+    canvas.addEventListener('mouseup', handleEnd);
+    canvas.addEventListener('mouseleave', handleEnd);
+
+    canvas.addEventListener('touchstart', handleStart, { passive: false });
+    canvas.addEventListener('touchmove', handleMove, { passive: false });
+    canvas.addEventListener('touchend', handleEnd);
+
     function simulate() {
         if (isSimulating) {
             time += 0.016; // 60 FPS
@@ -103,7 +180,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 requestAnimationFrame(simulate);
             }
         }
-    }
+    }   
 
     function checkCollision() {
         const dx = position.x * SCALE - targetPosition.x;
@@ -174,6 +251,7 @@ document.addEventListener('DOMContentLoaded', () => {
         isDragging = false;
     });
 
+
     document.getElementById('fireButton').addEventListener('click', handleFire);
     document.getElementById('resetButton').addEventListener('click', handleReset);
 
@@ -192,6 +270,8 @@ document.addEventListener('DOMContentLoaded', () => {
     draw();
 
     showExamButton.addEventListener('click', () => {
-        alert("Login Terlebih Dahulu")
-    })
+        alert("Login Terlebih Dahulu");
+    });
 });
+
+console.log("GLBB Simulation code updated. This should work on both desktop and mobile devices, including Pixel phones.");
